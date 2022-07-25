@@ -393,12 +393,26 @@ types:
     seq:
       - id: len_samples
         type: s4
-      - id: attribute_02
+      - id: maybe_pitch_adjust
         type: s4
-      - id: bits          # 8 or 16 (bits per sample)
+        doc: |
+          from comparing the extracted sounds with the sounds in the game
+          (see https://www.youtube.com/watch?v=Wse8iFMM-jg&t=207s and E1L1.LEV
+          sound 0), i think this is a speed/pitch adjust. 0x7000 seems to be
+          the nominal value, with sounds with that value sounding the same. but
+          notably door and elevator sound pitches sound different in game, and
+          they have a different value here. however, i havent managed to find
+          a consistent correlation between these values and the pitch change.
+          -- vfig
+      - id: bits
         type: s4
-      - id: attribute_04
+        doc: bits per sample; 8 or 16.
+      - id: loop_point
         type: s4
+        doc: |
+          index of sample (or possibly byte offset; with 8 bit sounds its the
+          same) from which to loop after reaching the end of the sound the
+          first time. 0 means the entire sample loops; -1 means no loop.
       - id: samples       # signed, mono, 11025 Hz PCM
         size: len_samples
 

@@ -135,9 +135,9 @@ class LevQuake(KaitaiStruct):
 
         def _read(self):
             self.len_samples = self._io.read_s4be()
-            self.attribute_02 = self._io.read_s4be()
+            self.maybe_pitch_adjust = self._io.read_s4be()
             self.bits = self._io.read_s4be()
-            self.attribute_04 = self._io.read_s4be()
+            self.loop_point = self._io.read_s4be()
             self.samples = self._io.read_bytes(self.len_samples)
 
 
