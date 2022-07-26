@@ -172,6 +172,8 @@ class ImportLEV(bpy.types.Operator, ImportHelper):
 			for y in range(imagesize[1]):
 				for x in range(imagesize[0]):
 					pos = (y * imagesize[0]) + x
+					# uncomment this to flip the textures correctly, but breaks UVs
+					#pos = ((imagesize[1] - y) * imagesize[0]) + x
 					pixel = item[pos]
 					pixels.append(pixel[0])
 					pixels.append(pixel[1])
@@ -186,6 +188,8 @@ class ImportLEV(bpy.types.Operator, ImportHelper):
 			for y in range(imagesize[1]):
 				for x in range(imagesize[0]):
 					pos = (y * imagesize[0]) + x
+					# uncomment this to flip the textures correctly, but breaks UVs
+					#pos = ((imagesize[1] - y - 1) * imagesize[0]) + x
 					pixel = palette[container[pos]]
 					pixels.append(pixel[0])
 					pixels.append(pixel[1])
@@ -656,8 +660,8 @@ class ImportLEV(bpy.types.Operator, ImportHelper):
 						if self.bFixRotation:
 							entloc = [
 								-entity.get_entity_data.coords[0] * self.ImportScale,
-								-entity.get_entity_data.coords[1] * self.ImportScale,
-								entity.get_entity_data.coords[2] * self.ImportScale
+								-entity.get_entity_data.coords[2] * self.ImportScale,
+								entity.get_entity_data.coords[1] * self.ImportScale
 							]
 						else:
 							entloc = [
